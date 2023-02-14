@@ -1,14 +1,15 @@
+
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/mkh1n/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/mkh1n/frontend-project-46/actions)",
-  "main": "index.js",
+  "main": "bin/gendiff.js",
   "type": "module",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest --bail --runInBand"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,12 @@
   "dependencies": {
     "commander": "^10.0.0",
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.1",
+    "jest": "^29.4.2"
   }
 }
