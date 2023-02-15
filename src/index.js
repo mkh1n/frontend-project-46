@@ -1,28 +1,12 @@
 /* eslint-disable consistent-return */
-import fs from 'fs';
 import _ from 'lodash';
-import { cwd } from 'node:process';
 import * as path from 'path';
+import parse from './parsers.js';
 
-function normalizePath(filepath) {
-  if (filepath.includes(cwd())) {
-    return filepath;
-  }
-  return path.resolve(cwd(), filepath);
-}
+function gendiff(file1Path, file2Path) {
+  const file1 = parse(file1Path, path.extname(path.basename(file1Path)));
+  const file2 = parse(file2Path, path.extname(path.basename(file2Path)));
 
-function gendiff(file1path, file2path) {
-  let file1;
-  let file2;
-  const ext = file1path.split('.').at(-1);
-
-  switch (ext) {
-    case 'json':
-      file1 = JSON.parse(fs.readFileSync(normalizePath(file1path), { encoding: 'utf-8' }));
-      file2 = JSON.parse(fs.readFileSync(normalizePath(file2path), { encoding: 'utf-8' }));
-      break;
-    default:
-  }
   const keys = _.sortBy(Array.from(new Set(Object.keys(file1).concat(Object.keys(file2)))));
 
   function makeStrdiff(first, second, key) {
