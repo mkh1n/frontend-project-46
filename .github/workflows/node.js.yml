@@ -1,12 +1,10 @@
 name: Node CI
-
 on:
   - push
-env:
-  CI: true
 
 jobs:
-  build:
+  linting:
+
     runs-on: ubuntu-latest
 
     strategy:
@@ -14,8 +12,9 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
