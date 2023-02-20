@@ -1,19 +1,20 @@
 import fs from 'fs';
 import gendiff from '../src/index.js';
 
-const formaters = ['stylish'];
+const formaters = ['plain', 'stylish'];
 const extensions = ['yml', 'json'];
 const path = './__tests__/__fixtures__/';
 
 function makeTest(formater, ext) {
+  const result = fs.readFileSync(`${path}${formater}Result.txt`, { encoding: 'utf8' });
   test(`${formater} ${ext}`, () => {
-    expect(gendiff(`${path}${formater}/file1.${ext}`, `${path}${formater}/file2.${ext}`))
-      .toEqual(fs.readFileSync(`${path}${formater}/${formater}.txt`, { encoding: 'utf8', flag: 'r' }));
+    expect(gendiff(`${path}before.${ext}`, `${path}after.${ext}`, formater))
+      .toEqual(result);
   });
 }
 
-formaters.forEach((formater) => {
-  extensions.forEach((ext) => {
+extensions.forEach((ext) => {
+  formaters.forEach((formater) => {
     makeTest(formater, ext);
   });
 });
