@@ -11,7 +11,7 @@ function gendiff(file1Path, file2Path, format) {
     case 'plain':
       return plainFormat(makeDiffObj(file1, file2));
     default:
-      return stylishFormat[format](makeDiffObj(file1, file2));
+      return stylishFormat(makeDiffObj(file1, file2));
   }
 }
 export default gendiff;
