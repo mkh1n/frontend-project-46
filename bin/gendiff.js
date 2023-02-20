@@ -9,5 +9,8 @@ program
   .helpOption('-h, --help', 'output usage information')
   .option('-f, --format, <type>', 'output format', 'stylish')
   .arguments('<filepath1> <filepath2>')
-  .action((filepath1, filepath2) => console.log(gendiff(filepath1, filepath2)));
+  .action((filepath1, filepath2) => console.log(
+    // eslint-disable-next-line no-underscore-dangle
+    gendiff(filepath1, filepath2, program._optionValues.format),
+  ));
 program.parse();
