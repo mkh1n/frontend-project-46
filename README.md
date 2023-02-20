@@ -3,5 +3,7 @@
 [![Node CI](https://github.com/mkh1n/frontend-project-46/actions/workflows/node.js.yml/badge.svg)](https://github.com/mkh1n/frontend-project-46/actions/workflows/node.js.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/bf7daa4ed2ce39ec5983/maintainability)](https://codeclimate.com/github/mkh1n/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bf7daa4ed2ce39ec5983/test_coverage)](https://codeclimate.com/github/mkh1n/frontend-project-46/test_coverage)
-
+stylish formater
 [![asciicast](https://asciinema.org/a/ffzpXf3G0noO2TgKutSzm2w10.svg)](https://asciinema.org/a/ffzpXf3G0noO2TgKutSzm2w10)
+plain formater
+[![asciicast](https://asciinema.org/a/sgqfWknD3zO41XJwMqMPidMwW.svg)](https://asciinema.org/a/sgqfWknD3zO41XJwMqMPidMwW)
