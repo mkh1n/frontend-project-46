@@ -4,5 +4,4 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/bf7daa4ed2ce39ec5983/maintainability)](https://codeclimate.com/github/mkh1n/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bf7daa4ed2ce39ec5983/test_coverage)](https://codeclimate.com/github/mkh1n/frontend-project-46/test_coverage)
 
-[![asciicast](https://asciinema.org/a/559539.svg)](https://asciinema.org/a/559539)
-[![asciicast](https://asciinema.org/a/FK1z53vS7ruwMMCPHDgW03tZY.svg)](https://asciinema.org/a/FK1z53vS7ruwMMCPHDgW03tZY)
+[![asciicast](https://asciinema.org/a/ffzpXf3G0noO2TgKutSzm2w10.svg)](https://asciinema.org/a/ffzpXf3G0noO2TgKutSzm2w10)
