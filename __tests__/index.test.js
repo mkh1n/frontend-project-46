@@ -1,9 +1,19 @@
+import fs from 'fs';
 import gendiff from '../src/index.js';
 
-test('flat', () => {
-  expect(gendiff('__tests__/__fixtures__/file1.json', '__tests__/__fixtures__/file2.json'))
-    .toEqual('{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}');
+const formaters = ['stylish'];
+const extensions = ['yml', 'json'];
+const path = './__tests__/__fixtures__/';
 
-  expect(gendiff('__tests__/__fixtures__/file1.yml', '__tests__/__fixtures__/file2.yml'))
-    .toEqual('{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}');
+function makeTest(formater, ext) {
+  test(`${formater} ${ext}`, () => {
+    expect(gendiff(`${path}${formater}/file1.${ext}`, `${path}${formater}/file2.${ext}`))
+      .toEqual(fs.readFileSync(`${path}${formater}/${formater}.txt`, { encoding: 'utf8', flag: 'r' }));
+  });
+}
+
+formaters.forEach((formater) => {
+  extensions.forEach((ext) => {
+    makeTest(formater, ext);
+  });
 });
