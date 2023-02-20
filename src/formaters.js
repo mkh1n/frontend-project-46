@@ -7,25 +7,57 @@ const prefixes = {
   unchanged: '  ',
 };
 
-const makeString = (key, value, depth) => {
+const makeStylishString = (key, value, depth) => {
   if (!_.isObject(value)) {
     return `${key}: ${value}`;
   }
-
   const indent = '  '.repeat(depth);
   const end = '  '.repeat(depth - 1);
   const start = `\n${indent}`;
 
   const result = Object.entries(value)
     .flatMap(
-      ([nodeKey, nodeValue]) => `${prefixes.unchanged}${makeString(nodeKey, nodeValue, depth + 2)}`,
+      ([nodeKey, nodeValue]) => `${prefixes.unchanged}${makeStylishString(nodeKey, nodeValue, depth + 2)}`,
     )
     .join(start);
 
   return `${key}: {${start}${result}\n${end}}`;
 };
+function makeValidVal(value) {
+  if (_.isObject(value)) {
+    return '[complex value]';
+  }
+  if (_.isString(value)) {
+    return `'${value}'`;
+  }
+  return value;
+}
+const plainFormat = (ast) => {
+  const iter = (nodes, fullPath = []) => {
+    // eslint-disable-next-line array-callback-return, consistent-return
+    const result = nodes.flatMap((node) => {
+      const name = [...fullPath, node.key].join('.');
+      switch (node.status) {
+        case 'updated':
+          return [
+            `Property '${name}' was updated. From ${makeValidVal(node.oldValue)} to ${makeValidVal(node.value)}`,
+          ];
+        case 'nested':
+          return `${iter(node.children, [...fullPath, node.key])}`;
+        case 'removed':
+          return `Property '${name}' was removed`;
+        case 'added':
+          return `Property '${name}' was added with value: ${makeValidVal(node.value)}`;
+        default: {
+          break;
+        }
+      }
+    });
+    return result.filter((str) => str).join('\n');
+  };
 
-const someFormat = (ast) => ast;
+  return iter(ast);
+};
 
 const stylishFormat = (ast) => {
   const iter = (nodes, depth) => {
@@ -34,12 +66,12 @@ const stylishFormat = (ast) => {
 
     const result = nodes.flatMap((node) => {
       const { key, value, status } = node;
-      const keyValue = makeString(key, value, depth + 2);
+      const keyValue = makeStylishString(key, value, depth + 2);
 
       switch (status) {
         case 'updated':
           return [
-            `${prefixes.removed}${makeString(key, node.oldValue, depth + 2)}`,
+            `${prefixes.removed}${makeStylishString(key, node.oldValue, depth + 2)}`,
             `${prefixes.added}${keyValue}`,
           ];
         case 'nested':
@@ -59,4 +91,4 @@ const stylishFormat = (ast) => {
   return iter(ast, 1);
 };
 
-export { stylishFormat, someFormat };
+export { stylishFormat, plainFormat };
