@@ -2,16 +2,18 @@
 import * as path from 'path';
 import parse from './parsers.js';
 import makeDiffObj from './makeDiffObj.js';
-import { stylishFormat, plainFormat } from './formatters/index.js';
+import { stylishFormat, plainFormat, jsonFormat } from './formatters/index.js';
 
 function gendiff(file1Path, file2Path, format) {
-  const file1 = parse(file1Path, path.extname(path.basename(file1Path)));
-  const file2 = parse(file2Path, path.extname(path.basename(file2Path)));
+  const before = parse(file1Path, path.extname(path.basename(file1Path)));
+  const after = parse(file2Path, path.extname(path.basename(file2Path)));
   switch (format) {
     case 'plain':
-      return plainFormat(makeDiffObj(file1, file2));
+      return plainFormat(makeDiffObj(before, after));
+    case 'json':
+      return jsonFormat(makeDiffObj(before, after));
     default:
-      return stylishFormat(makeDiffObj(file1, file2));
+      return stylishFormat(makeDiffObj(before, after));
   }
 }
 export default gendiff;
