@@ -19,5 +19,6 @@ export default (filePath, ext) => {
     case '.yml':
       return yaml.load(fs.readFileSync(normalizePath(filePath)));
     default:
+      throw new Error(`Format ${ext} - is incorrect!`)
   }
 };
