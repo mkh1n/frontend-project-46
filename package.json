@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/mkh1n/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/mkh1n/frontend-project-46/actions)",
+  "description": "This program looks for the difference between two files and outputs the difference in one of the available formats",
   "main": "src/index.js",
   "type": "module",
   "bin": {
