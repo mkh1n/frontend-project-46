@@ -15,6 +15,6 @@ function normalizePath(filepath) {
 function gendiff(file1Path, file2Path, formatter) {
   const before = parse(fs.readFileSync(normalizePath(file1Path)), path.extname(path.basename(file1Path)));
   const after = parse(fs.readFileSync(normalizePath(file2Path)), path.extname(path.basename(file2Path)));
-  return format(before, after, formatter)
+  return format(before, after, formatter);
 }
 export default gendiff;

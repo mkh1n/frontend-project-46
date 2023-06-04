@@ -3,7 +3,7 @@ import plainFormat from './plain.js';
 import jsonFormat from './json.js';
 import makeDiffObj from '../makeDiffObj.js';
 
-function format(file1, file2, formatter){
+function format(file1, file2, formatter) {
   switch (formatter) {
     case 'plain':
       return plainFormat(makeDiffObj(file1, file2));
@@ -13,4 +13,4 @@ function format(file1, file2, formatter){
       return stylishFormat(makeDiffObj(file1, file2));
   }
 }
-export default format
+export default format;

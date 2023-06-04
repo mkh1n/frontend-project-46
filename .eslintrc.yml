@@ -23,4 +23,6 @@ rules:
     - ignorePackages
     - js: always
   no-underscore-dangle: 'off'
+  array-callback-return: 'off'
+  consistent-return: 'off'
   max-len: 'off'
