@@ -1,19 +1,20 @@
 /* eslint-disable consistent-return */
 import * as path from 'path';
+import fs from 'fs';
+import { cwd } from 'node:process';
 import parse from './parsers.js';
-import makeDiffObj from './makeDiffObj.js';
-import { stylishFormat, plainFormat, jsonFormat } from './formatters/index.js';
+import format from './formatters/index.js';
 
-function gendiff(file1Path, file2Path, format) {
-  const before = parse(file1Path, path.extname(path.basename(file1Path)));
-  const after = parse(file2Path, path.extname(path.basename(file2Path)));
-  switch (format) {
-    case 'plain':
-      return plainFormat(makeDiffObj(before, after));
-    case 'json':
-      return jsonFormat(makeDiffObj(before, after));
-    default:
-      return stylishFormat(makeDiffObj(before, after));
+function normalizePath(filepath) {
+  if (filepath.includes(cwd())) {
+    return filepath;
   }
+  return path.resolve(cwd(), filepath);
+}
+
+function gendiff(file1Path, file2Path, formatter) {
+  const before = parse(fs.readFileSync(normalizePath(file1Path)), path.extname(path.basename(file1Path)));
+  const after = parse(fs.readFileSync(normalizePath(file2Path)), path.extname(path.basename(file2Path)));
+  return format(before, after, formatter)
 }
 export default gendiff;
