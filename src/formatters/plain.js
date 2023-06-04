@@ -11,6 +11,7 @@ function makeValue(value) {
 }
 const plainFormat = (ast) => {
   const iter = (nodes, fullPath = []) => {
+    // eslint-disable-next-line array-callback-return, consistent-return
     const result = nodes.flatMap((node) => {
       const name = [...fullPath, node.key].join('.');
       switch (node.status) {
